@@ -1,24 +1,22 @@
 const express = require('express');
-const mysql = require('mysql');
+const Sequelize = require('sequelize');
 
 const app = express();
 
 app.listen(3000, () => {
-    console.log('[SERVER] Server is running...');
+    console.log('\n[SERVER] Server is running...\n');
 });
 
-const conn = mysql.createConnection({
+const connection = new Sequelize('hltv', 'root', '1601', {
     host: 'localhost',
-    port: '3306',
-    user: 'root',
-    password: '1601',
-    database: 'hltv',
-    insecureAuth: true
+    port: 3306,
+    dialect: 'mysql'
 });
 
-conn.connect(function(err) {
-    if (err) throw err;
-    console.log('[DATABASE] Database connected!');
+connection.authenticate().then(() => {
+    console.log('\n[DATABASE] Database connected!');
+}).catch((err) => {
+    console.error('[DATABASE] Database error: ' + err);
 });
 
 const team = require('./src/routes/team.js');
