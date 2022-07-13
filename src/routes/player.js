@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         fkTeam: req.body.fkTeam
     });
 
-    console.log(colorize('[DATABASE] inserindo novo player: ', 33, 39) + player);
+    console.log(colorize('[DATABASE] Inserindo novo player: ', 33, 39) + player);
     res.send(player);
 });
 
